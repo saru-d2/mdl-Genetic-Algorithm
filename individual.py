@@ -14,7 +14,7 @@ class Individual:
         
         #penalizing overfitting
         if abs(self.errorTuple[0] - self.errorTuple[1]) >= 200000:
-            self.errorTuple += 200000
+            self.error += 200000
 
 
 def mutate(genes, mutateProb, numMutate):
