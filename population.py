@@ -11,7 +11,7 @@ class Population:
         if ch == 1:
             # random, initial
             for i in range(conf.POPULATION_SIZE):
-                self.popList.append(Individual(conf.OVERFIT, 1, 10))
+                self.popList.append(Individual(conf.OVERFIT, conf.MUTATE_PROB, conf.NUM_MUTATE))
         elif ch == 2:
             # create population from gene
             print(len(popList))
@@ -74,8 +74,8 @@ def newGeneration(oldgen):
         print("Selected maties: " + str(indsToMate))
         child1Genes, child2Genes = crossover(
             oldgen.popList[indsToMate[0]], oldgen.popList[indsToMate[1]])
-        childGenesList.append(Individual(child1Genes, 1, 10))
-        childGenesList.append(Individual(child2Genes, 1, 10))
+        childGenesList.append(Individual(child1Genes, conf.MUTATE_PROB, conf.NUM_MUTATE))
+        childGenesList.append(Individual(child2Genes, conf.MUTATE_PROB, conf.NUM_MUTATE))
         # childGenesList.append(child1Genes)
 
     bestofBothGenerations = oldgen.popList + childGenesList

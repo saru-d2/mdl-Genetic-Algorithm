@@ -4,7 +4,7 @@ import pickle
 generations = []
 
 numGens = 4
-time = '21-01-56-25'
+time = '21-02-02-07'
 
 for i in range(numGens):
     with open('./prevResults/' +time+ 'gen' + str(i+1) + '.pkl', 'rb') as fd:
@@ -14,8 +14,7 @@ objs = []
 
 for idx, population in enumerate(generations):
     genNo = idx + 1
-    
-    for Individual in population:
-        print('')
-        print(Individual)
+    print('\n\n\n')
+    for Individual, err in population:
+        print(err)
     

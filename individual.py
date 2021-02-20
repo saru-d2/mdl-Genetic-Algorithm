@@ -36,5 +36,5 @@ def mutate(genes, mutateProb, numMutate):
     return genes
 
 def getError(genes):
-    return [random.uniform(0, 10000), random.uniform(0, 10000)]
-    # return get_errors(secrets.KEY, genes.tolist())
+    # return [random.uniform(0, 10000), random.uniform(0, 10000)]
+    return get_errors(secrets.KEY, genes.tolist())
