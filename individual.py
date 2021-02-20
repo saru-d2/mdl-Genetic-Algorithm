@@ -23,7 +23,7 @@ def mutate(genes, mutateProb, numMutate):
     for index in indsToMutate:
         # if it should be mutated or left alone
 
-        if mutateProb > random.random():
+        if mutateProb >= random.random():
             #mutate!
 
             if genes[index] == 0.0:
@@ -36,4 +36,5 @@ def mutate(genes, mutateProb, numMutate):
     return genes
 
 def getError(genes):
-    return get_errors(secrets.KEY, genes.tolist())
+    return [random.uniform(0, 10000), random.uniform(0, 10000)]
+    # return get_errors(secrets.KEY, genes.tolist())
