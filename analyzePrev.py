@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 generations = []
 
-numGens = conf.NUM_GENS
+numGens = 10
 time = '21-21-57-54'
 
 for i in range(numGens):
@@ -45,7 +45,7 @@ for gen in generations:
 
 
 # plt.plot(avgErr)
-plt.plot(bestTestErr + bestTrainErr, label='bestError')
+# plt.plot(bestTestErr + bestTrainErr, label='bestError')
 plt.plot(bestTestErr , label='bestTest')
 plt.plot(bestTrainErr, label='bestTrain')
 plt.legend()
@@ -56,4 +56,3 @@ plt.plot(avgTestErr , label='avgTest')
 plt.plot(avgTrainErr, label='avgTrain')
 plt.legend()
 plt.show()
-
