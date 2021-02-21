@@ -20,6 +20,7 @@ bestTrainErr = np.array([])
 avgTrainErr = np.array([])
 bestTestErr = np.array([])
 avgTestErr = np.array([])
+totalError = np.array([])
     
 for gen in generations:
     totTrainErr = 0
@@ -36,6 +37,8 @@ for gen in generations:
         minTestErr = min(minTestErr,   err[1])
         totTestErr +=  err[1] 
 
+        totalError[]
+
     bestTrainErr = np.append(bestTrainErr, minTrainErr)
     avgTrainErr = np.append(avgTrainErr, totTrainErr / conf.POPULATION_SIZE)
 
@@ -43,9 +46,14 @@ for gen in generations:
     avgTestErr = np.append(avgTestErr, totTestErr / conf.POPULATION_SIZE)
     print('')
 
-
+print('train')
+print (bestTrainErr)
+print (avgTrainErr)
+print('test')
+print (bestTestErr)
+print (avgTestErr)
 # plt.plot(avgErr)
-# plt.plot(bestTestErr + bestTrainErr, label='bestError')
+plt.plot(bestTestErr + bestTrainErr, label='bestError')
 plt.plot(bestTestErr , label='bestTest')
 plt.plot(bestTrainErr, label='bestTrain')
 plt.legend()
