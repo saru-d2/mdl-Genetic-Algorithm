@@ -7,8 +7,8 @@ from client import get_errors
 class Individual:
     def __init__(self, genes, mutateProb, numMutate):
         # handle mutation
-        genes = np.copy(genes)
-        self.genes = mutate(genes, mutateProb, numMutate)
+        gene = np.copy(genes)
+        self.genes = mutate(gene, mutateProb, numMutate)
         self.errorTuple = getError(self.genes) 
         self.error = (self.errorTuple[0] + self.errorTuple[1]) / 2
         
@@ -36,5 +36,5 @@ def mutate(genes, mutateProb, numMutate):
     return genes
 
 def getError(genes):
-    return [random.uniform(0, 10000), random.uniform(0, 10000)]
-    # return get_errors(secrets.KEY, genes.tolist())
+    # return [random.uniform(0, 10000), random.uniform(0, 10000)]
+    return get_errors(secrets.KEY, genes.tolist())

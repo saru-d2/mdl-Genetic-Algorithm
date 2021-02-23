@@ -1,6 +1,7 @@
 import numpy as np
 import config as conf
 from individual import Individual
+import random
 
 
 class Population:
@@ -43,7 +44,9 @@ class Population:
 def crossover(par1, par2):
     child1Genes = par1.genes.copy()
     child2Genes = par2.genes.copy()
-    indList = np.random.choice(np.arange(0, 11), 5, replace=False)
+    randPrefix = random.randrange(0, 11 + 1)
+    indList = np.arange(0, randPrefix)
+    # indList = np.random.choice(np.arange(0, 11), 5, replace=False)
     for index in indList:
         child1Genes[index], child2Genes[index] = child2Genes[index], child2Genes[index]
 
@@ -78,12 +81,11 @@ def newGeneration(oldgen):
         childGenesList.append(Individual(child2Genes, conf.MUTATE_PROB, conf.NUM_MUTATE))
         # childGenesList.append(child1Genes)
 
-    bestofBothGenerations = oldgen.popList + childGenesList
+    bestofBothGenerations = oldgen.popList[:2] + childGenesList
     bestofBothGenerations.sort(key=lambda x: x.error)
     print('---sortedlist-----')
     for i in bestofBothGenerations:
         print(i.error)
-
     print('-----------------')
 
 
