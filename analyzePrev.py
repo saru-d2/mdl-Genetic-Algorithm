@@ -14,9 +14,9 @@ for i in range(numGens):
 avgerr = np.zeros(numGens)
 bestErr = np.zeros(numGens)
 for idx, gen in enumerate(generations):
-    bestErr[idx] =  gen[0][1][1]
+    bestErr[idx] =  gen[0][1][1] + gen[0][1][0]
     for _, err in gen:
-        avgerr[idx] +=  err[1]
+        avgerr[idx] +=  err[1] + err[0]
 
 avgerr /= numGens
 
