@@ -12,7 +12,7 @@ class Population:
         if ch == 1:
             # random, initial
             for i in range(conf.POPULATION_SIZE):
-                self.popList.append(Individual(conf.OVERFIT, conf.MUTATE_PROB, conf.NUM_MUTATE))
+                self.popList.append(Individual(conf.OVERFIT, conf.MUTATE_PROB, conf.NUM_MUTATE * 2))
         elif ch == 2:
             # create population from gene
             print(len(popList))
