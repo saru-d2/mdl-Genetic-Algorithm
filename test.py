@@ -1,4 +1,9 @@
 from datetime import datetime
+import numpy as np
+import client
+import secrets
 
-print(datetime.now())
+list = [0.0, -1.457990220064754e-12, -2.2898007842769645e-13, 4.620107525277624e-11, -1.7521481289918844e-10, -1.8366976965696096e-15,
+        8.529440604118815e-16, 2.2942330256117977e-05, -2.0472100298772093e-06, -1.597928341587757e-08, 9.982140340891233e-10]
 
+print(client.get_errors(secrets.KEY, list))

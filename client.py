@@ -30,5 +30,5 @@ def get_overfit_vector(id):
 
 # Replace 'SECRET_KEY' with your team's secret key (Will be sent over email)
 if __name__ == "__main__":
-    print(get_errors('SECRET_KEY', get_overfit_vector('SECRET_KEY')))
-    print(get_overfit_vector('SECRET_KEY'))
+    print(get_errors('bUYHvLfDwF8kFqFFx2Zkw9NEbTpMIXwMqLr860NGlx2MYl12qf', get_overfit_vector('bUYHvLfDwF8kFqFFx2Zkw9NEbTpMIXwMqLr860NGlx2MYl12qf')))
+    print(get_overfit_vector('bUYHvLfDwF8kFqFFx2Zkw9NEbTpMIXwMqLr860NGlx2MYl12qf'))

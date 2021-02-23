@@ -6,6 +6,9 @@ import os
 
 curDateTime = datetime.now().strftime("%d-%H-%M-%S")
 
+def pickleLoad(path):
+    with open(path, 'rb') as fd:
+        return pickle.load(fd)
 
 def pickleDump(population, gen):
     indiList = []
