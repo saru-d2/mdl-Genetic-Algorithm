@@ -18,6 +18,7 @@ class Individual:
 
 
 def mutate(genes, mutateProb, numMutate):
+    numMutate = 11
     indsToMutate = np.random.choice(np.arange(0, 11), numMutate, replace= False)
 
     for index in indsToMutate:
