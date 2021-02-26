@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 
 generations = []
 
-numGens = 12
-time = '24-22-50-06'
+numGens = 5
+time = '26-15-10-00'
 
 for i in range(numGens):
     with open('./prevResults/' +time+ '/gen' + str(i+1) + '.pkl', 'rb') as fd:
