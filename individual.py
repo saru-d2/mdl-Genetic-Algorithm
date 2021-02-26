@@ -31,6 +31,7 @@ def mutate(genes, mutateProb, numMutate):
                 genes[index] += random.uniform(-1e-20, 1e-20)
 
             genes[index] *= random.uniform(-conf.MUTATE_FACTOR, conf.MUTATE_FACTOR ) + 1
+            #make sure weights are btw -10, 10
             genes[index] = min(genes[index], 10.0)
             genes[index] = max(genes[index], -10.0)
 

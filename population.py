@@ -81,7 +81,8 @@ def newGeneration(oldgen):
         childGenesList.append(Individual(child2Genes, conf.MUTATE_PROB, conf.NUM_MUTATE))
         # childGenesList.append(child1Genes)
 
-    bestofBothGenerations = oldgen.popList[:2] + childGenesList
+    # bestofBothGenerations = oldgen.popList[:2] + childGenesList
+    bestofBothGenerations =  childGenesList
     bestofBothGenerations.sort(key=lambda x: x.error)
     print('---sortedlist-----')
     for i in bestofBothGenerations:
