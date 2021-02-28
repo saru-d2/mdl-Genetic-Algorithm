@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 generations = []
 
 numGens = 5
-time = '26-15-10-00'
+time = '28-23-28-42'
 
 for i in range(numGens):
     with open('./prevResults/' +time+ '/gen' + str(i+1) + '.pkl', 'rb') as fd:
@@ -20,12 +20,13 @@ for idx, gen in enumerate(generations):
 
 avgerr /= numGens
 
+print(avgerr)
+print(bestErr)
+
 plt.plot(avgerr, label = 'avgErr')
 plt.legend()
 plt.show()
 
-print(avgerr)
-print(bestErr)
 
 
 plt.plot(bestErr, label = 'bestErr')
