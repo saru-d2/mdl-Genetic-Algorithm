@@ -7,16 +7,13 @@ import random
 class Population:
     '''object for population'''
 
-    def __init__(self, ch, popList = None):
+    def __init__(self, popList, genNumber):
         self.popList = []
-        if ch == 1:
-            # random, initial
-            for i in range(conf.POPULATION_SIZE):
-                self.popList.append(Individual(conf.OVERFIT, conf.MUTATE_PROB, conf.NUM_MUTATE * 2))
-        elif ch == 2:
-            # create population from gene
-            print(len(popList))
-            self.popList = popList
+        self.genNumber = genNumber
+        
+        # create population from gene
+        print(len(popList))
+        self.popList = popList
 
         self.sort()
 
@@ -62,6 +59,7 @@ def newGeneration(oldgen):
     for i in oldgen.popList[:conf.BREEDING_POOL_SIZE]:
         probs.append((total_error - i.error) /
                      (total_error*(conf.BREEDING_POOL_SIZE-1)))
+    print(len(probs))
 
     print(probs)
 
@@ -77,11 +75,11 @@ def newGeneration(oldgen):
         print("Selected maties: " + str(indsToMate))
         child1Genes, child2Genes = crossover(
             oldgen.popList[indsToMate[0]], oldgen.popList[indsToMate[1]])
-        childGenesList.append(Individual(child1Genes, conf.MUTATE_PROB, conf.NUM_MUTATE))
-        childGenesList.append(Individual(child2Genes, conf.MUTATE_PROB, conf.NUM_MUTATE))
+        childGenesList.append(Individual(child1Genes))
+        childGenesList.append(Individual(child2Genes))
         # childGenesList.append(child1Genes)
 
-    # bestofBothGenerations = oldgen.popList[:2] + childGenesList
+    bestofBothGenerations = oldgen.popList[:conf.NUM_PARENTS_PASSDOWN] + childGenesList
     bestofBothGenerations =  childGenesList
     bestofBothGenerations.sort(key=lambda x: x.error)
     print('---sortedlist-----')
@@ -90,4 +88,4 @@ def newGeneration(oldgen):
     print('-----------------')
 
 
-    return Population(2, bestofBothGenerations[0:conf.POPULATION_SIZE])
+    return Population(bestofBothGenerations[0:conf.POPULATION_SIZE], oldgen.genNumber + 1)

@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 from population import Population, newGeneration
 import secrets
-import pickle
 from datetime import datetime
 import matplotlib.pyplot as plt
 import utilities
@@ -13,6 +12,7 @@ from individual import Individual
 print('hello world ughhhh')
 
 # ch = int(input('choose: 1. start from scratch'))
+
 
 
 generations = []
@@ -29,7 +29,7 @@ if ch ==2 :
     initGen = utilities.pickleLoad(path)
     indiList = []
     for genes, _ in initGen:
-        indiList.append(Individual(genes, 0, 0))
+        indiList.append(Individual(genes))
     init = Population(ch, indiList)
 
 init.print()

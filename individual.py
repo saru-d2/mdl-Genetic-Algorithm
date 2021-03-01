@@ -5,19 +5,24 @@ import secrets
 from client import get_errors
 
 class Individual:
-    def __init__(self, genes, mutateProb, numMutate):
+    def __init__(self, genes, errorTuple = None):
         # handle mutation
-        gene = np.copy(genes)
-        self.genes = mutate(gene, mutateProb, numMutate)
-        self.errorTuple = getError(self.genes) 
-        self.error = (self.errorTuple[0] + self.errorTuple[1]) / 2
-        
+        self.genes = np.copy(genes)
+        if errorTuple == None:
+            self.genes = mutate(self.genes)
+            self.errorTuple = getError(self.genes) 
+            
+        else:
+            self.errorTuple = errorTuple
+
+        self.error = self.errorTuple[0] + self.errorTuple[1] 
         #penalizing overfitting
         if abs(self.errorTuple[0] - self.errorTuple[1]) >= 200000:
-            self.error += 200000
+            self.error += 500000
 
 
-def mutate(genes, mutateProb, numMutate):
+def mutate(genes):
+    mutateProb = conf.MUTATE_PROB
     numMutate = 11
     indsToMutate = np.random.choice(np.arange(0, 11), numMutate, replace= False)
 
@@ -38,5 +43,6 @@ def mutate(genes, mutateProb, numMutate):
     return genes
 
 def getError(genes):
-    # return [random.uniform(0, 10000), random.uniform(0, 10000)]
+    if conf.TEST:
+        return [random.uniform(0, 10000), random.uniform(0, 10000)]
     return get_errors(secrets.KEY, genes.tolist())
