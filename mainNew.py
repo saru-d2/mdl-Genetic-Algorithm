@@ -11,7 +11,6 @@ print('hello world ughhhh')
 
 # ch = int(input('choose: 1. start from scratch'))
 
-
 generations = []
 
 startGenNum = 1
@@ -29,27 +28,26 @@ if utils.prevDataExists():
 else:
     initPopList = []
     for i in range(conf.POPULATION_SIZE):
-        curGene = conf.OVERFIT
-        randIndices = np.random.choice(np.arange(0, 11), random.randint(0, 3), replace=False)
+        curGene = conf.OVERFIT.copy()
+        randIndices = np.random.choice(
+            np.arange(0, 11), random.randint(0, 2), replace=False)
         for ind in randIndices:
             curGene[ind] = 0.0
+            print(ind)
         initPopList.append(Individual(curGene))
+        print(curGene)
     initPopulation = Population(initPopList, 1)
     print(initPopulation.popList)
     utils.writeJSON(initPopulation)
-    
 
 
-generations.append(initPopulation)
-utils.print_stats(generations[0], 1)
+# generations.append(initPopulation)
+# utils.print_stats(generations[0], 1)
 
-for i in range(1, conf.NUM_GENS):
-    curgenNum = startGenNum + i
-    pregen = generations[-1]
-    curgen = newGeneration(pregen)
-    generations.append(curgen)
-    
-    utils.appendGenToFile(curgen)
+# for i in range(1, conf.NUM_GENS):
+#     curgenNum = startGenNum + i
+#     pregen = generations[-1]
+#     curgen = newGeneration(pregen)
+#     generations.append(curgen)
 
-
-
+#     utils.appendGenToFile(curgen)
