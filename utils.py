@@ -15,6 +15,8 @@ def print_stats(population, gen):
     print('best ' + str(population.getFittest().error))
 
 def writeJSON(genData):
+    if conf.TEST:
+        return
     temp = {'PrevGens': []}
     genDict = {
         'genNumber': genData.genNumber,
@@ -32,6 +34,8 @@ def writeJSON(genData):
 
 def appendGenToFile(genData):
     # reading for purposes of appending
+    if conf.TEST:
+        return
     temp = loadPrevData()
     genDict = {
         'genNumber': genData.genNumber,

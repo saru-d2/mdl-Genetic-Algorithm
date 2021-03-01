@@ -23,7 +23,7 @@ class Individual:
 
 def mutate(genes):
     mutateProb = conf.MUTATE_PROB
-    numMutate = 11
+    numMutate = conf.NUM_MUTATE
     indsToMutate = np.random.choice(np.arange(0, 11), numMutate, replace= False)
 
     for index in indsToMutate:

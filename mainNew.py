@@ -1,13 +1,10 @@
-import config as conf
 import numpy as np
-import pandas as pd
-from population import Population, newGeneration
-import secrets
-from datetime import datetime
-import matplotlib.pyplot as plt
-import utils
-from individual import Individual
 import random
+
+from population import Population, newGeneration
+from individual import Individual
+import config as conf
+import utils
 
 
 print('hello world ughhhh')
@@ -33,7 +30,7 @@ else:
     initPopList = []
     for i in range(conf.POPULATION_SIZE):
         curGene = conf.OVERFIT
-        randIndices = np.random.choice(np.arange(0, 11), random.randint(0, 5), replace=False)
+        randIndices = np.random.choice(np.arange(0, 11), random.randint(0, 3), replace=False)
         for ind in randIndices:
             curGene[ind] = 0.0
         initPopList.append(Individual(curGene))
