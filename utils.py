@@ -34,6 +34,7 @@ def writeJSON(genData):
 def appendGenToFile(genData):
     # reading for purposes of appending
     if conf.TEST:
+        
         return
     temp = loadPrevData()
     genDict = {

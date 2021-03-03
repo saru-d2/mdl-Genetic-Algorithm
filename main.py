@@ -1,58 +1,64 @@
-import config as conf
 import numpy as np
-import pandas as pd
+import random
+
 from population import Population, newGeneration
-import secrets
-from datetime import datetime
-import matplotlib.pyplot as plt
-import utilities
 from individual import Individual
+import config as conf
+import utils
 
 
 print('hello world ughhhh')
 
 # ch = int(input('choose: 1. start from scratch'))
 
-
-
 generations = []
-avg_errs = []
-least_errs = []
 
-ch = int(input('enter choice: 1.from scratch, 2.load old generation \n'))
-if ch == 1:
-    init = Population(ch)
+startGenNum = 1
 
-if ch ==2 :
-    # print('F will implement later')
-    path = input('give path to previous gen \n')
-    initGen = utilities.pickleLoad(path)
-    indiList = []
-    for genes, _ in initGen:
-        indiList.append(Individual(genes))
-    init = Population(ch, indiList)
+if utils.prevDataExists():
+    prevData = utils.loadPrevData()
+    prevData = prevData['PrevGens']
+    prevPopList = []
+    lastGen = prevData[-1]
+    for each in lastGen['popList']:
+        prevPopList.append(Individual(each['genes'], each['errorTuple']))
+    initPopulation = Population(prevPopList, lastGen['genNumber'])
+    startGenNum = lastGen['genNumber']
 
-init.print()
+else:
+    initPopList = []
+    for i in range(conf.POPULATION_SIZE):
+        curGene = conf.OVERFIT.copy()
+        # it chooses random features to ignore
+        randIndices = np.random.choice(
+            np.arange(0, 11), random.randint(0, 2), replace=False)
+        for ind in randIndices:
+            curGene[ind] = 0.0
+            print(ind)
+        initPopList.append(Individual(curGene))
+        print(curGene)
+    initPopulation = Population(initPopList, 1)
+    print(initPopulation.popList)
+    utils.writeJSON(initPopulation)
 
-generations.append(init)
-utilities.print_stats(generations[0], 1)
-utilities.pickleDump(generations[0], 1)
-avg_errs.append(generations[-1].getMeanError())
-least_errs.append(generations[-1].getFittest().error)
+
+generations.append(initPopulation)
+utils.print_stats(generations[0], 1)
+
+avgErr = []
+bestErr = []
 
 for i in range(1, conf.NUM_GENS):
-    curgenNum = i + 1
+    curgenNum = startGenNum + i
     pregen = generations[-1]
     curgen = newGeneration(pregen)
     generations.append(curgen)
-    utilities.pickleDump(curgen, curgenNum)
-    # print(curgen.getFittest().error)
-    utilities.print_stats(generations[curgenNum - 1], curgenNum)
-    avg_errs.append(generations[-1].getMeanError())
-    least_errs.append(generations[-1].getFittest().error)
+    avgErr.append(generations[-1].getMeanError())
+    bestErr.append(generations[-1].getFittest().error)
+    utils.appendGenToFile(curgen)
 
 
-plt.plot(range(1, conf.NUM_GENS + 1), least_errs, label='best')
-plt.plot(range(1, conf.NUM_GENS + 1), avg_errs, label='avg')
-plt.legend()
-plt.show()
+print(bestErr)
+
+print(avgErr)
+# generations[-1].getFittest().submit()
