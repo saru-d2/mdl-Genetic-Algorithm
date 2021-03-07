@@ -2,13 +2,20 @@ import pickle
 import config as conf
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
+import sys
 generations = []
 
-numGens = 5
-time = '24-22-50-06'
+numGens = 10
 
+time = '23-15-29-43'
 
+print(len(sys.argv))
+print(sys.argv)
+
+if len(sys.argv) >= 3:
+    time = sys.argv[1]
+    numGens = int(sys.argv[2])
 for i in range(numGens):
     with open('./prevResults/' +time+ '/gen' + str(i+1) + '.pkl', 'rb') as fd:
         generations.append(pickle.load(fd))

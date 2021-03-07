@@ -28,12 +28,12 @@ def mutate(genes):
 
     for index in indsToMutate:
         # if it should be mutated or left alone
+        
+        if genes[index] == 0:
+            genes[index] = random.uniform(-1e-20, 1e-20)
 
         if mutateProb >= random.random():
             # mutate!
-
-            if genes[index] == 0.0:
-                genes[index] += random.uniform(-1e-20, 1e-20)
 
             genes[index] *= random.uniform(-conf.MUTATE_FACTOR,
                                            conf.MUTATE_FACTOR) + 1

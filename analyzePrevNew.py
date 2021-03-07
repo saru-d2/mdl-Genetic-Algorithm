@@ -1,9 +1,11 @@
-import utils
+import json
 import matplotlib.pyplot as plt
 import numpy as np
 import config as conf
 
-data = utils.loadPrevData()
+fileName = 'prevGens.json'
+with open(fileName) as fd:
+    data = json.load(fd)
 
 numGens = len(data['PrevGens'])
 print(numGens)
@@ -34,6 +36,7 @@ plt.legend()
 plt.show()
 
 
-bestVector = data['PrevGens'][-1]['popList'][0]['genes']
+bestVector = data['PrevGens'][-1]['popList'][6]['genes']
+print(data['PrevGens'][-1]['popList'][6]['errorTuple'])
 print('best')
 print(bestVector)

@@ -61,4 +61,5 @@ for i in range(1, conf.NUM_GENS):
 print(bestErr)
 
 print(avgErr)
+
 # generations[-1].getFittest().submit()
