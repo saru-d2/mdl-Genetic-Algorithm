@@ -15,7 +15,8 @@ class Individual:
         else:
             self.errorTuple = errorTuple
 
-        self.error = self.errorTuple[0] + self.errorTuple[1]
+        self.error = abs(self.errorTuple[0] - self.errorTuple[1]) * (
+            self.errorTuple[0] + self.errorTuple[1])
         # penalizing overfitting
         if abs(self.errorTuple[0] - self.errorTuple[1]) >= 200000:
             self.error += 500000
@@ -28,7 +29,7 @@ def mutate(genes):
 
     for index in indsToMutate:
         # if it should be mutated or left alone
-        
+
         if genes[index] == 0:
             genes[index] = random.uniform(-1e-20, 1e-20)
 

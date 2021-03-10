@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import config as conf
 
-fileName = 'prevGens.json'
+fileName = 'prevGensNewNew.json'
 with open(fileName) as fd:
     data = json.load(fd)
 
@@ -36,7 +36,7 @@ plt.legend()
 plt.show()
 
 
-bestVector = data['PrevGens'][-1]['popList'][6]['genes']
+bestVector = data['PrevGens'][-1]['popList'][0]['genes']
 print(data['PrevGens'][-1]['popList'][6]['errorTuple'])
 print('best')
 print(bestVector)

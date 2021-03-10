@@ -10,11 +10,13 @@ class ind:
         self.genes = genes
         self.errorTuple = errTuple
         self.gen = gen
+        self.error = abs(self.errorTuple[0] - self.errorTuple[1]) * (
+            self.errorTuple[0] + self.errorTuple[1])
 
 def sortAndDedup(indList):
     # indListSet  = set(indList)
     # print(indListSet)
-    indList.sort(key=lambda x: x.errorTuple[0] + x.errorTuple[1])
+    indList.sort(key=lambda x: x.error)
     indListSet = []
     for i, ind in enumerate(indList):
         if len(indListSet) > 0 and indListSet[-1].genes == ind.genes:
@@ -23,7 +25,7 @@ def sortAndDedup(indList):
     return indListSet
 
 
-fileName = 'prevGens.json'
+fileName = 'prevGensNewNew.json'
 with open(fileName) as fd:
     data = json.load(fd)
 
@@ -43,7 +45,7 @@ for i, ind in enumerate(indlist2):
     print(ind.gen)
     print(sum(ind.errorTuple))
     best10.append(ind.genes)
-    if i >= 10:
+    if i >= 8:
         break
 
 print(str(best10))
