@@ -2,6 +2,7 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 import config as conf
+import math as meth
 
 
 
@@ -10,8 +11,7 @@ class ind:
         self.genes = genes
         self.errorTuple = errTuple
         self.gen = gen
-        self.error = abs(self.errorTuple[0] - self.errorTuple[1]) * (
-            self.errorTuple[0] + self.errorTuple[1])
+        self.error = self.errorTuple[0] + self.errorTuple[1]
 
 def sortAndDedup(indList):
     # indListSet  = set(indList)
@@ -43,7 +43,8 @@ best10 = []
 for i, ind in enumerate(indlist2):
     # print(ind.genes)
     print(ind.gen)
-    print(sum(ind.errorTuple))
+    # print(sum(ind.errorTuple))
+    print(meth.log(ind.error, 10))
     best10.append(ind.genes)
     if i >= 8:
         break
