@@ -15,8 +15,17 @@ class Individual:
         else:
             self.errorTuple = errorTuple
 
-        self.error = abs(self.errorTuple[0] - self.errorTuple[1]) * (
-            self.errorTuple[0] + self.errorTuple[1])
+        # self.error = abs(self.errorTuple[0] - self.errorTuple[1]) * (
+        #     self.errorTuple[0] + self.errorTuple[1])
+
+        # rand_ratio = random.random()
+        # self.error = rand_ratio * \
+        #     self.errorTuple[0] + (1-rand_ratio) * self.errorTuple[1]
+
+        self.error = conf.ERR_FACTOR * \
+            abs(self.errorTuple[0] - self.errorTuple[1]) + \
+            self.errorTuple[0] + self.errorTuple[1]
+
         # penalizing overfitting
         if abs(self.errorTuple[0] - self.errorTuple[1]) >= 200000:
             self.error += 500000
