@@ -18,32 +18,35 @@ class Individual:
         # self.error = abs(self.errorTuple[0] - self.errorTuple[1]) * (
         #     self.errorTuple[0] + self.errorTuple[1])
 
-        self.error = conf.ERR_FACTOR * \
-            abs(self.errorTuple[0] - self.errorTuple[1]) + \
-            self.errorTuple[0] + self.errorTuple[1]
+        # self.error = conf.ERR_FACTOR * \
+        #     abs(self.errorTuple[0] - self.errorTuple[1]) + \
+        #     self.errorTuple[0] + self.errorTuple[1]
+
+
+        # self.error = abs(self.errorTuple[1] - self.errorTuple[0])**2 * (
+        #     self.errorTuple[0] + self.errorTuple[1])**3
 
         # penalizing overfitting
-        if abs(self.errorTuple[0] - self.errorTuple[1]) >= 1e11:
-            self.error *= 1.5
-
+        # if abs(self.errorTuple[0] - self.errorTuple[1]) >= 1e11:
+        #     self.error *= 1.5
+        
+        self.error = self.errorTuple[0] + self.errorTuple[1]
+        # 1.3 val + 0.7 train
 
 def mutate(genes):
     mutateProb = conf.MUTATE_PROB
-    numMutate = conf.NUM_MUTATE
-    indsToMutate = np.random.choice(np.arange(0, 11), numMutate, replace=False)
+    # numMutate = conf.NUM_MUTATE
 
-    for index in indsToMutate:
+    for index in range(11):
         # if it should be mutated or left alone
-
-        if genes[index] == 0:
-            genes[index] = random.uniform(-1e-20, 1e-20)
-
         if mutateProb >= random.random():
+            if genes[index] == 0:
+                genes[index] = random.uniform(-1e-20, 1e-20)
             # mutate!
-
-            genes[index] *= random.uniform(-conf.MUTATE_FACTOR,
-                                           conf.MUTATE_FACTOR) + 1
-            # make sure weights are btw -10, 10
+            else:
+                genes[index] *= random.uniform(-conf.MUTATE_FACTOR,
+                                            conf.MUTATE_FACTOR) + 1
+                # make sure weights are btw -10, 10
             genes[index] = min(genes[index], 10.0)
             genes[index] = max(genes[index], -10.0)
 

@@ -11,8 +11,7 @@ class ind:
         self.genes = genes
         self.errorTuple = errTuple
         self.gen = gen
-        self.error = conf.ERR_FACTOR * abs(self.errorTuple[0] - self.errorTuple[1]) + self.errorTuple[0] + self.errorTuple[1]
-
+        self.error =  0.7 * self.errorTuple[0] + self.errorTuple[1]  
 def sortAndDedup(indList):
     # indListSet  = set(indList)
     # print(indListSet)
@@ -25,18 +24,21 @@ def sortAndDedup(indList):
     return indListSet
 
 
-fileName = 'prevGensNewNew.json'
+fileName = 'MAR14NEW.json'
 with open(fileName) as fd:
     data = json.load(fd)
 
 indList = []
 totGens = len(data['PrevGens'])
 
+
 for gen in data['PrevGens']:
-    # if gen['genNumber'] > totGens - conf.NUM_GENS + 1:
-    for indFromGen in gen['popList']: 
-        #create ind object
-        indList.append(ind(indFromGen['genes'], indFromGen['errorTuple'], gen['genNumber']))
+
+
+    if gen['genNumber'] > 33:
+        for indFromGen in gen['popList']: 
+            #create ind object
+            indList.append(ind(indFromGen['genes'], indFromGen['errorTuple'], gen['genNumber']))
 
 print("NUMBER OF VECTORS:")
 print(len(indList))
@@ -49,12 +51,13 @@ best10 = []
 for i, ind in enumerate(indlist2):
     # print(ind.genes)
     print(ind.gen)
+    print(np.format_float_scientific(ind.errorTuple[0] + ind.errorTuple[1]))
     print(ind.errorTuple)
     print(ind.genes)
     # print(sum(ind.errorTuple))
     # print(meth.log(ind.error, 10))
     best10.append(ind.genes)
-    if i >= 9:
+    if i >= 14:
         break
 
 # print(str(best10))

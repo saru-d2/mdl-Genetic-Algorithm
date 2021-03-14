@@ -30,11 +30,6 @@ else:
     for i in range(conf.POPULATION_SIZE):
         curGene = conf.OVERFIT.copy()
         # it chooses random features to ignore
-        randIndices = np.random.choice(
-            np.arange(0, 11), random.randint(0, 2), replace=False)
-        for ind in randIndices:
-            curGene[ind] = 0.0
-            print(ind)
         initPopList.append(Individual(curGene))
         print(curGene)
     initPopulation = Population(initPopList, 1)
@@ -56,6 +51,16 @@ for i in range(1, conf.NUM_GENS):
     avgErr.append(generations[-1].getMeanError())
     bestErr.append(generations[-1].getFittest().error)
     utils.appendGenToFile(curgen)
+    
+    
+    print(curgen.getFittest().errorTuple[0])
+    print(curgen.getFittest().errorTuple[1])
+    print(curgen.getFittest().genes)
+    inp = input('continue?')
+    if inp == 'NO':
+        break
+
+    
 
 
 print(bestErr)
