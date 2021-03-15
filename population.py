@@ -97,9 +97,9 @@ def newGeneration(oldgen):
                      (total_error*(conf.BREEDING_POOL_SIZE-1)))
     print(len(probs))
 
-    for i in oldgen.popList[:conf.BREEDING_POOL_SIZE]:
-        print(i)
-        toSubmit['selected'].append(i.genes)
+    # for i in oldgen.popList[:conf.BREEDING_POOL_SIZE]:
+    #     print(i)
+    #     toSubmit['selected'].append(i.genes)
 
     print(np.sum(np.array(probs)))
 
@@ -112,7 +112,9 @@ def newGeneration(oldgen):
             np.arange(0, conf.BREEDING_POOL_SIZE), 2, replace=False, p=probs)
 
         print("Selected mates: " + str(indsToMate))
-
+        for inds in indsToMate:
+            toSubmit['selected'].append(indsToMate[ind].genes)
+            
         child1Genes, child2Genes = crossover(
             oldgen.popList[indsToMate[0]], oldgen.popList[indsToMate[1]])
 
