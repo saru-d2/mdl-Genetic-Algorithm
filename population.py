@@ -61,7 +61,7 @@ def crossover(par1, par2):
 
     u = random.uniform(0, 1)
 
-    nc = 3
+    nc = 10
 
     if u < 0.5:
         beta = (2 * u) ** (1 / (nc + 1))
