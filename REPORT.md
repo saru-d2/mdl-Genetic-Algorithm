@@ -256,13 +256,13 @@ Generation 1:
 
 The initial population for this generation is made up of mutated versions of the given overfit vector.
 
-![Img 1](./GEN1.jpeg)
+![Img 1](./assets/GEN1.jpeg)
 
 Generation 2:
 
-![Img 2](./GEN2.jpeg)
+![Img 2](./assets/GEN2.jpeg)
 
 Generation 3:
 
-![Img 3](./GEN3.jpeg)
+![Img 3](./assets/GEN3.jpeg)
 
