@@ -105,15 +105,7 @@ This was our successful attempt to find well-performing vectors. It is very simi
 
 We started out with 'ERR_FACTOR * train + val' as the given vector was overfit to the training set and thus had a much lower error on the training set. By using this, we were able to bring the training and validation errors to comparable levels.
 
-After we had accomplished that, we then switched to 'train + val' so as to reduce the total error of the vectors. This fared differently from our first attempt due to two main reasons:
-
-1. We changed the hyper-parameters:
-
-   ​	In this attempt, we made the population size smaller and made the mutation probability slightly smaller as well.
-
-2. We became helicopter parents:
-
-   ​	We started strictly monitoring the errors of the vectors in the subsequent generations. We continuously changed the number of parents selected for crossover accordingly to select parents with potential. This allowed us to continuously get good performing vectors. This also allowed to immediately find the point at which the generations started overfitting and allowed us to roll back those generations.
+After we had accomplished that, we then switched to 'train + val' so as to reduce the total error of the vectors. This fared differently from our first attempt due to the changes we made to our hyperparameters and also our extensive checking to avoid overfitting.
 
 ## Selection Logic
 
